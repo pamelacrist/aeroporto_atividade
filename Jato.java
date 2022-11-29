@@ -1,4 +1,4 @@
-public class Jato extends Voo {
+public class Jato extends Aeromodelo {
     private String cor;
     private int velocidade;
         
@@ -21,4 +21,23 @@ public class Jato extends Voo {
     public void setvelocidade(int velocidade) { 
         this.velocidade = velocidade;
     }
+    public static Jato getJato(int id) throws Exception {
+        for (Jato Jato : Jatos) {
+            if (Jato.getId() == id) {
+                return Jato;
+            }
+        }
+        throw new Exception("Carros não encontrado");
+    }
+
+    public static void removeCarro(int id) throws Exception {
+        Jato Jato = getJato(id);
+        Jato.remove(Jato);
+    }
+    @Override
+    public String toString() {
+        return super.toString() 
+        + "placa=" + placa + "\n"
+        + "cor=" + cor + "\n";    
+     }  
 }

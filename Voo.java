@@ -1,4 +1,4 @@
-public abstract class Voo {
+public class Voo {
     private int id;
     private String numero;
     private String data;
@@ -9,7 +9,7 @@ public abstract class Voo {
     private String copiloto;
     private String observacao;
 
-    public Voo (int id,String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao) {
+    protected Voo (int id,String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao) {
         this.id = id;
         this.numero = numero;
         this.data = data;
