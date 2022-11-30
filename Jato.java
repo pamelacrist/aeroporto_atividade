@@ -1,26 +1,32 @@
+
 public class Jato extends Aeromodelo {
+
     private String cor;
     private int velocidade;
-        
-    public Jato (String cor,int velocidade) {
-        
+
+    public Jato(String cor, int velocidade) {
+
         this.cor = cor;
         this.velocidade = velocidade;
-        
+
     }
-        
+
     public String getcor() {
         return cor;
     }
+
     public void setcor(String cor) {
         this.cor = cor;
     }
+
     public int getvelocidade() {
         return velocidade;
     }
-    public void setvelocidade(int velocidade) { 
+
+    public void setvelocidade(int velocidade) {
         this.velocidade = velocidade;
     }
+
     public static Jato getJato(int id) throws Exception {
         for (Jato Jato : Jatos) {
             if (Jato.getId() == id) {
@@ -34,10 +40,11 @@ public class Jato extends Aeromodelo {
         Jato Jato = getJato(id);
         Jato.remove(Jato);
     }
+
     @Override
     public String toString() {
-        return super.toString() 
-        + "cor=" + cor + "\n"
-        + "velocidade=" + velocidade + "\n";   
-     }  
+        return super.toString()
+                + "cor=" + cor + "\n"
+                + "velocidade=" + velocidade + "\n";
+    }
 }
