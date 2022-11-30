@@ -1,4 +1,4 @@
-public abstract class Voo {
+public class Voo {
     private int id;
     private String numero;
     private String data;
@@ -9,7 +9,7 @@ public abstract class Voo {
     private String copiloto;
     private String observacao;
 
-    public Voo (int id,String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao) {
+    protected Voo (int id,String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao) {
         this.id = id;
         this.numero = numero;
         this.data = data;
@@ -75,12 +75,31 @@ public abstract class Voo {
     public void setobservacao(String observacao) {
         this.observacao = observacao;
     }
-
-
-
-
-
-
-
     
+    public static Voo getVoo(int id) throws Exception {
+        for (Voo Voo : Voos) {
+            if (Voo.getId() == id) {
+                return Voo;
+            }
+        }
+        throw new Exception("Erro, Voo Não Encontrado");
+    }
+
+    public static void removeVoo(int id) throws Exception {
+        Voo Voo = getVoo(id);
+        Voo.remove(Voo);
+    }
+    @Override
+    public String toString() {
+        return super.toString() 
+        + "id=" + id + "\n"
+        + "numero=" + numero + "\n"
+        + "data=" + data + "\n"
+        + "hora=" + hora + "\n"
+        + "origem=" + origem + "\n"
+        + "destino=" + destino + "\n"
+        + "piloto=" + piloto + "\n"
+        + "copiloto=" + copiloto + "\n"
+        + "observacao=" + observacao + "\n";
+     }    
 }

@@ -27,4 +27,24 @@ public class Companhia {
     public void setcnpj(String cnpj) { 
         this.cnpj = cnpj;
     }
+    public static Companhia getCompanhia(int id) throws Exception {
+        for (Companhia Companhia : Companhias) {
+            if (Jato.getId() == id) {
+                return Companhia;
+            }
+        }
+        throw new Exception("Erro, Companhia Não Encontrado");
+    }
+
+    public static void removeCompanhia(int id) throws Exception {
+        Companhia Companhia = getCompanhia(id);
+        Jato.remove(Companhia);
+    }
+    @Override
+    public String toString() {
+        return super.toString() 
+        + "id=" + id + "\n"
+        + "nome=" + nome + "\n"
+        + "cnpj=" + cnpj + "\n";   
+     }  
 }
