@@ -1,15 +1,14 @@
+import java.util.ArrayList;
 
 public class Aviao extends Aeromodelo {
 
     private String prefixo;
     private int capacidade;
 
-    public Aviao(String prefixo, int capacidade) {
-
+    public Aviao(String prefixo, int capacidade, String nome, String locacao ,ArrayList<Helicoptero>  helicopteros) {
+        super(GetId.getNextId(helicopteros), nome, locacao);
         this.prefixo = prefixo;
         this.capacidade = capacidade;
-
-        avioes.add(this);
     }
 
     public String getprefixo() {
@@ -29,32 +28,27 @@ public class Aviao extends Aeromodelo {
     }
 
     public static ArrayList<Aviao> getAviao() {
-        return Aviao;
+        return null;//Aviao;
     }
 
     public static Aviao getAviao(int id) throws Exception {
-        for (Aviao Aviao : Avioes) {
-            if (Aviao.getId() == id) {
-                return Aviao;
-            }
-        }
         throw new Exception("Carros não encontrado");
     }
 
     public static void removeAviao(int id) throws Exception {
         Aviao Aviao = getAviao(id);
-        avioes.remove(Aviao);
     }
 
     @Override
     public String toString() {
         return super.toString()
-                << << << < HEAD
          + "prefixo=" + prefixo + "\n"
                 + "capacidade=" + capacidade + "\n";
-         == == ==
-                = +"placa=" + placa + "\n"
-                + "cor=" + cor + "\n";
-         >>> >>> > 2bf71843807057e0cb720f9eacbb3049920eb94b
+    }
+
+    @Override
+    public int getId() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

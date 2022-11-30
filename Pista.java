@@ -20,17 +20,11 @@ public class Pista {
         this.numero = numero;
     }
     public static Pista getPista(int id) throws Exception {
-        for (Pista Pista : Pistas) {
-            if (Pista.getId() == id) {
-                return Pista;
-            }
-        }
         throw new Exception("Erro, Pista Não Encontrado");
     }
 
     public static void removePista(int id) throws Exception {
         Pista Pista = getPista(id);
-        Jato.remove(Pista);
     }
     @Override
     public String toString() {

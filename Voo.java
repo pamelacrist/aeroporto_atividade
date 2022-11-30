@@ -77,17 +77,11 @@ public class Voo {
     }
     
     public static Voo getVoo(int id) throws Exception {
-        for (Voo Voo : Voos) {
-            if (Voo.getId() == id) {
-                return Voo;
-            }
-        }
         throw new Exception("Erro, Voo Não Encontrado");
     }
 
     public static void removeVoo(int id) throws Exception {
         Voo Voo = getVoo(id);
-        Voo.remove(Voo);
     }
     @Override
     public String toString() {

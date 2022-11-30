@@ -1,47 +1,50 @@
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Helicoptero extends Aeromodelo {
-
     private String cor;
     private int capacidade;
 
-    public Helicoptero(String cor, int capacidade, String nome, String locacao, ArrayList<Aeromodelo> helicopteros) {
+    public Helicoptero(String cor, int capacidade, String nome, String locacao ,ArrayList<Helicoptero>  helicopteros) {
         super(GetId.getNextId(helicopteros), nome, locacao);
         this.cor = cor;
         this.capacidade = capacidade;
-
-        Helicoptero.add(this);
+        try{
+        PreparedStatement insert = DAO.createConnection().prepareStatement(
+            "INSERT INTO helicoptero (marca, modelo, capacidade) VALUES (?, ?, ?);"
+        );
+        insert.setString(1, this.getMarca());
+        insert.setString(2, this.getModelo());
+        insert.setInt(3, this.getCapacidade());
+        insert.execute();
+        DAO.closeConnection();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
-    public String getcor() {
-        return cor;
-    }
-
-    public void setcor(String cor) {
+    public Helicoptero(int id, String cor, int capacidade, String nome, String modelo, String marca) {
+        super(id, marca, modelo);
         this.cor = cor;
-    }
-
-    public int getcapacidade() {
-        return capacidade;
-    }
-
-    public void setcapacidade(int capacidade) {
         this.capacidade = capacidade;
     }
 
-    public static Helicoptero getCarro(int id) throws Exception {
-        for (Helicoptero Helicoptero : Helicopteros) {
-            if (Helicoptero.getId() == id) {
-                return Helicoptero;
-            }
-        }
-        throw new Exception("Carros não encontrado");
+    public String getCor() {
+        return cor;
     }
 
-    public static void removeCarro(int id) throws Exception {
-        Helicoptero Helicoptero = getHelicoptero(id);
-        Helicopteros.remove(Helicoptero);
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
     }
 
     @Override
@@ -49,5 +52,62 @@ public class Helicoptero extends Aeromodelo {
         return super.toString()
                 + "capacidade=" + capacidade + "\n"
                 + "cor=" + cor + "\n";
+    }
+
+    public Helicoptero getById(int id)  {
+        try {
+            Helicoptero helicoptero = null;
+            ResultSet select = DAO.createConnection().createStatement().executeQuery(
+                "SELECT * FROM helicoptero where id="+id+";"
+            );
+            while(select.next()){
+                helicoptero = new Helicoptero(
+                    select.getInt("id"), 
+                    select.getString("cor"),
+                    select.getInt("capacidade"),
+                    select.getString("nome"),
+                    select.getString("modelo"),
+                    select.getString("marca")
+                );
+                return helicoptero;
+            }
+        }
+        catch (Exception err) {
+            System.out.println(err);
+        }
+        return null;
+    }
+
+
+    public ArrayList<Helicoptero> getAll(int id)  {
+        try {
+            ArrayList<Helicoptero> helicopteros = new ArrayList<>();
+            ResultSet select = DAO.createConnection().createStatement().executeQuery(
+                "SELECT * FROM helicoptero;"
+            );
+            while(select.next()){
+                Helicoptero helicoptero = new Helicoptero(
+                    select.getInt("id"), 
+                    select.getString("cor"),
+                    select.getInt("capacidade"),
+                    select.getString("nome"),
+                    select.getString("modelo"),
+                    select.getString("marca")
+                );
+                helicopteros.add(helicoptero);
+            }
+            return helicopteros;
+        }
+        catch (Exception err) {
+            System.out.println(err);
+        }
+        return null;
+    }
+
+
+    @Override
+    public int getId() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

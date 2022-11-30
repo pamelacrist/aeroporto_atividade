@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 
 public class Jato extends Aeromodelo {
 
     private String cor;
     private int velocidade;
 
-    public Jato(String cor, int velocidade) {
-
+    public Jato(String cor, int velocidade, String nome, String locacao ,ArrayList<Helicoptero>  helicopteros) {
+        super(GetId.getNextId(helicopteros), nome, locacao);
         this.cor = cor;
         this.velocidade = velocidade;
 
@@ -28,17 +29,11 @@ public class Jato extends Aeromodelo {
     }
 
     public static Jato getJato(int id) throws Exception {
-        for (Jato Jato : Jatos) {
-            if (Jato.getId() == id) {
-                return Jato;
-            }
-        }
         throw new Exception("Jato não encontrado");
     }
 
     public static void removeJato(int id) throws Exception {
         Jato Jato = getJato(id);
-        Jato.remove(Jato);
     }
 
     @Override
@@ -46,5 +41,11 @@ public class Jato extends Aeromodelo {
         return super.toString()
                 + "cor=" + cor + "\n"
                 + "velocidade=" + velocidade + "\n";
+    }
+
+    @Override
+    public int getId() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

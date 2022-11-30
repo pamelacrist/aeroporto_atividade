@@ -1,13 +1,31 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public abstract class DAO {
-    private Connection connection;
+    
+    private static Connection connection;
 
-    public void setConnection(){
-        try{
-            final String URL = "";
+    public static Connection createConnection() {
+        try {
+            final String URL = "jdbc:mysql://localhost:3306/aeroporto";
             final String USER = "root";
-            final String PASSWORD = " ";
+            final String PASSWORD = "";
+
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            return connection;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
+
+    public static void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
