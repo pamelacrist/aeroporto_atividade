@@ -3,12 +3,14 @@ public abstract class Aeromodelo implements GetId {
 
     private int id;
     private String marca;
+    private String nome;
     private String modelo;
 
-    public Aeromodelo(int id, String marca, String modelo) {
+    public Aeromodelo(int id, String marca, String modelo, String nome) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
+        this.nome = nome;
     }
 
     public int getid() {

@@ -9,7 +9,6 @@ public class Jato extends Aeromodelo {
         super(GetId.getNextId(helicopteros), nome, locacao);
         this.cor = cor;
         this.velocidade = velocidade;
-
     }
 
     public String getcor() {

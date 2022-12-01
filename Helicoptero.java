@@ -7,8 +7,8 @@ public class Helicoptero extends Aeromodelo {
     private String cor;
     private int capacidade;
 
-    public Helicoptero(String cor, int capacidade, String nome, String locacao ,ArrayList<Helicoptero>  helicopteros) {
-        super(GetId.getNextId(helicopteros), nome, locacao);
+    public Helicoptero(String cor, int capacidade, String nome ,String marca , String modelo,ArrayList<Helicoptero>  helicopteros) {
+        super(GetId.getNextId(helicopteros), marca, modelo, nome);
         this.cor = cor;
         this.capacidade = capacidade;
         try{
@@ -26,7 +26,7 @@ public class Helicoptero extends Aeromodelo {
     }
 
     public Helicoptero(int id, String cor, int capacidade, String nome, String modelo, String marca) {
-        super(id, marca, modelo);
+        super(id, marca, nome, modelo);
         this.cor = cor;
         this.capacidade = capacidade;
     }

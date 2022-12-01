@@ -32,5 +32,4 @@ public class Pista {
         + "id=" + id + "\n"
         + "numero=" + numero + "\n";
      }  
-
 }
