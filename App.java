@@ -12,35 +12,11 @@ public class App {
 
         do {
             System.out.println("opções de menu");
-            System.out.println("1 - Cadastrar Avião");
-            System.out.println("2 - Cadastrar Helicoptero");
-            System.out.println("3 - Cadastrar Jato");
-            System.out.println("4 - Cadastrar Companhia");
-            System.out.println("5 - Cadastrar Hangar");
-            System.out.println("6 - Cadastrar Pista");
-            System.out.println("7 - Cadastrar Voo");
-            System.out.println("8 - Listar Avião");
-            System.out.println("9 - Listar Helicoptero");
-            System.out.println("10 - Listar Jato");
-            System.out.println("11 - Listar Companhia");
-            System.out.println("12 - Listar Hangar");
-            System.out.println("13 - Listar Pista");
-            System.out.println("14 - Listar Voo");
-            System.out.println("15 - alterar Avião");
-            System.out.println("16 - alterar Helicoptero");
-            System.out.println("17 - alterar Jato");
-            System.out.println("18 - alterar Companhia");
-            System.out.println("19 - alterar Hangar");
-            System.out.println("20 - alterar Pista");
-            System.out.println("21 - alterar Voo");
-            System.out.println("22 - excluir Avião");
-            System.out.println("23 - excluir Helicoptero");
-            System.out.println("24 - excluir Jato");
-            System.out.println("25 - excluir Companhia");
-            System.out.println("26 - excluir Hangar");
-            System.out.println("27 - excluir Pista");
-            System.out.println("28 - excluir Voo");
-            System.out.println("29 - Sair");
+            System.out.println("1 - Cadastrar ");
+            System.out.println("2 - alterar ");
+            System.out.println("3 - Listar ");
+            System.out.println("4 - excluir ");
+            System.out.println("5 - Sair");
             System.out.print("Opção: ");
             try {
                 opcao = scanner.nextInt();
@@ -50,124 +26,185 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    cadastrarAviao(scanner);
+                    cadastrar(scanner);
                     break;
                 case 2:
-                    cadastrarHelicoptero(scanner);
+                    alterar(scanner);
                     break;
                 case 3:
-                    cadastrarJato(scanner);
+                    listar(scanner);
                     break;
                 case 4:
-                    cadastrarCompanhia(scanner);
+                    excluir(scanner);
                     break;
                 case 5:
-                    cadastrarHangar(scanner);
-                    break;
-                case 6:
-                    cadastrarPista(scanner);
-                    break;
-                case 7:
-                    cadastrarVoo(scanner);
-                    break;    
-                case 8:
-                    listarAviao();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 9:
-                    listarHelicoptero();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 10:
-                    listarJato();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 11:
-                    listarCompanhia();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 12:
-                    listarHangar();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 13:
-                    listarPista();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 14:
-                    listarVoo();
-                    try{
-                        System.in.read();
-                    }catch(Exception e){}
-                    break;
-                case 15:
-                    AlterarAviao(scanner);
-                    break;
-                case 16:
-                    AlterarHelicoptero(scanner);
-                    break;
-                case 17:
-                    AlterarJato(scanner);
-                    break;
-                case 18:
-                    AlterarCompanhia(scanner);
-                    break;
-                case 1:
-                    AlterarHangar(scanner);
-                    break;
-                case 19:
-                    AlterarPista(scanner);
-                    break;
-                case 20:
-                    AlterarVoo(scanner);
-                    break;    
-                case 21:
-                    excluirAviao(scanner);
-                    break;
-                case 22:
-                    excluirHelicoptero(scanner);
-                    break;
-                case 23:
-                    excluirJato(scanner);
-                    break;
-                case 24:
-                    excluirCompanhia(scanner);
-                    break;
-                case 19:
-                    excluirHangar(scanner);
-                    break;
-                case 25:
-                    excluirPista(scanner);
-                    break;
-                case 26:
-                    excluirVoo(scanner);
-                    break;
-                case 27:
                     sair();
                     break;
                 default:
                     System.out.println("Ops...opção inválida!");
                     break;
             }
-        } while (opcao != 27);
+        } while (opcao != 5);
         
     }
+    private static void alterar(Scanner scanner) {
+        System.out.println("Digite o tipo: ([A] Aeronave; [C] Companhia; [H] Hangar; [P] Pista; [V] Voo)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                alterarAeronave(scanner);
+                break;
+            case "C":
+                alterarCompanhia(scanner);
+                break;
+            case "H":
+                alterarHangar(scanner);
+                break;
+            case "P":
+                alterarPista(scanner);
+                break;
+            case "V":
+                alterarVoo(scanner);
+                break;
+            default:
+                break;
+        }
+    }
 
-    public static void cadastrarAviao(Scanner scanner) {
-        String cor;
-        int idLocacao;
+    private static void listar(Scanner scanner) {
+        System.out.println("Digite o tipo: ([A] Aeronave; [C] Companhia; [H] Hangar; [P] Pista; [V] Voo)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                listarAeronave(scanner);
+                break;
+            case "C":
+                listarCompanhia(scanner);
+                break;
+            case "H":
+                listarHangar(scanner);
+                break;
+            case "P":
+                listarPista(scanner);
+                break;
+            case "V":
+                listarVoo(scanner);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void listarAeronave(Scanner scanner) {
+        System.out.println("Listar o Aeronave");
+        System.out.println("Digite o tipo: ([A] Aviao; [H] Helicoptero; [J] Jato)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                Aviao.getAll();
+                break;
+            case "H":
+                Helicoptero.getAll();
+                break;
+            case "J":
+                Jato.getAll();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
+    private static void excluir(Scanner scanner) {
+        System.out.println("Digite o tipo: ([A] Aeronave; [C] Companhia; [H] Hangar; [P] Pista; [V] Voo)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                excluirAeronave(scanner);
+                break;
+            case "C":
+                excluirCompanhia(scanner);
+                break;
+            case "H":
+                excluirHangar(scanner);
+                break;
+            case "P":
+                excluirPista(scanner);
+                break;
+            case "V":
+                excluirVoo(scanner);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private static void excluirAeronave(Scanner scanner) {
+        System.out.println("Excluir o aviao");
+        System.out.println("Digite o tipo: ([A] Aviao; [H] Helicoptero; [J] Jato)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                excluirAviao(scanner);
+                break;
+            case "H":
+                Helicoptero.remove(scanner);
+                break;
+            case "J":
+                excluirJato(scanner);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private static void cadastrar(Scanner scanner) {
+        System.out.println("Digite o tipo: ([A] Aeronave; [C] Companhia; [H] Hangar; [P] Pista; [V] Voo)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                cadastrarAeronave(scanner);
+                break;
+            case "C":
+                cadastrarCompanhia(scanner);
+                break;
+            case "H":
+                cadastrarHangar(scanner);
+                break;
+            case "P":
+                cadastrarPista(scanner);
+                break;
+            case "V":
+                cadastrarVoo(scanner);
+                break;
+            default:
+                break;
+        }
+    }
+   
+    private static void alterarAeronave(Scanner scanner) {
+        System.out.println("Alterar Aeronave");
+        System.out.println("Informe o nome:");
+        String nome = scanner.next(); 
+        System.out.println("Digite o tipo: ([A] Aviao; [H] Helicoptero; [J] Jato)");
+        String tipo = scanner.next();
+        switch (tipo) {
+            case "A":
+                alterarAviao(scanner,nome);
+                break;
+            case "H":
+                alterarHelicoptero(scanner, nome);
+                break;
+            case "J":
+                alterarJato(scanner,nome);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private static void cadastrarAeronave(Scanner scanner) {
         System.out.println("Cadastrar aviao");
         System.out.println("Informe a nome:");
         String nome = scanner.next(); 
@@ -175,34 +212,66 @@ public class App {
         String tipo = scanner.next();
         switch (tipo) {
             case "A":
-                System.out.println("Informe o prefixo;:");
-                String prefixo = scanner.next(); 
-                System.out.println("Informe a capacidade:");
-                capacidade = scanner.nextInt();
-                System.out.println("Informe o número da locação:");
-                idLocacao = scanner.nextInt();
-                try {
-                    Locacao locacao = Locacao.getLocacao(idLocacao);
-                    Aviao aviao = new Aviao(
-                        prefixo,
-                        capacidade,
-                        nome,
-                        locacao
-                    );
-                    System.out.println("Aviao cadastrado com sucesso!");
-                    System.out.println(aviao);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+               cadastrarAviao(scanner,nome);
                 break;
-            case "C":
+            case "H":
                 cadastrarHelicoptero(scanner, nome);
                 break;
-            case "M":
+            case "J":
                 cadastrarJato(scanner,nome);
                 break;
             default:
                 break;
+        }
+    }
+    
+    public static void cadastrarJato(Scanner scanner, String nome) {
+        System.out.println("Informe o marca:");
+        String marca = scanner.next(); 
+        System.out.println("Informe o modelo:");
+        String modelo = scanner.next(); 
+        System.out.println("Informe o prefixo:");
+        String cor = scanner.next(); 
+        System.out.println("Informe a capacidade:");
+        int velocidade = scanner.nextInt();
+        try {
+            Jato jato = new Jato(
+                marca,
+                modelo,
+                nome,
+                cor,
+                velocidade
+            );
+            System.out.println("Aviao cadastrado com sucesso!");
+            System.out.println(jato);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void cadastrarAviao(Scanner scanner, String nome) {
+        System.out.println("Informe o marca:");
+        String marca = scanner.next(); 
+        System.out.println("Informe o modelo:");
+        String modelo = scanner.next(); 
+        System.out.println("Informe o prefixo:");
+        String prefixo = scanner.next(); 
+        System.out.println("Informe a capacidade:");
+        String capacidade = scanner.next();
+        System.out.println("Informe o número da Companhia:");
+        int IdCompanhia = scanner.nextInt();
+        try {
+            Aviao aviao = new Aviao(
+                marca,
+                modelo,
+                prefixo,
+                capacidade,
+                IdCompanhia
+            );
+            System.out.println("Aviao cadastrado com sucesso!");
+            System.out.println(aviao);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
   
@@ -215,11 +284,8 @@ public class App {
         String marca = scanner.next();
         System.out.println("Informe a modelo:");
         String modelo = scanner.next();
-        System.out.println("Informe o número da locação:");
-        Integer idHelicoptero = scanner.nextInt();
         try {
             Helicoptero helicoptero = new Helicoptero(
-                idHelicoptero,
                 cor,
                 capacidade,
                 marca,
@@ -233,6 +299,32 @@ public class App {
         }
     }
 
+    public static void alterarHelicoptero(Scanner scanner, String nome){
+        System.out.println("Informe a cor:");
+        String cor = scanner.next();
+        System.out.println("Informe a capacidade:");
+        int capacidade = scanner.nextInt();
+        System.out.println("Informe a marca:");
+        String marca = scanner.next();
+        System.out.println("Informe a modelo:");
+        String modelo = scanner.next();
+        System.out.println("Informe o id do Helicoptero:");
+        Integer idHelicoptero = scanner.nextInt();
+        try {
+            Helicoptero helicoptero = new Helicoptero(
+                idHelicoptero,
+                cor,
+                capacidade,
+                marca,
+                modelo,
+                nome
+            );
+        System.out.println("Helicoptero alterado com sucesso!");
+        System.out.println(helicoptero);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void sair() {
         System.out.println("Saindo...");

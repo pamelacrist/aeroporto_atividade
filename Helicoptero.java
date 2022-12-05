@@ -2,13 +2,14 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Helicoptero extends Aeromodelo {
     private String cor;
     private int capacidade;
 
-    public Helicoptero(String cor, int capacidade, String nome ,String marca , String modelo,ArrayList<Helicoptero>  helicopteros) {
-        super(GetId.getNextId(helicopteros), marca, modelo, nome);
+    public Helicoptero(String cor, int capacidade, String nome ,String marca , String modelo) {
+        super( marca, modelo, nome);
         this.cor = cor;
         this.capacidade = capacidade;
         try{
@@ -54,7 +55,7 @@ public class Helicoptero extends Aeromodelo {
                 + "cor=" + cor + "\n";
     }
 
-    public Helicoptero getById(int id)  {
+    public static Helicoptero getById(int id)  {
         try {
             Helicoptero helicoptero = null;
             ResultSet select = DAO.createConnection().createStatement().executeQuery(
@@ -79,7 +80,7 @@ public class Helicoptero extends Aeromodelo {
     }
 
 
-    public ArrayList<Helicoptero> getAll(int id)  {
+    public static ArrayList<Helicoptero> getAll()  {
         try {
             ArrayList<Helicoptero> helicopteros = new ArrayList<>();
             ResultSet select = DAO.createConnection().createStatement().executeQuery(
@@ -104,10 +105,41 @@ public class Helicoptero extends Aeromodelo {
         return null;
     }
 
+    public  boolean atualizar(Scanner scanner){
+        try{
 
-    @Override
-    public int getId() {
-        // TODO Auto-generated method stub
-        return 0;
+            PreparedStatement update = DAO.createConnection().prepareStatement(
+                "UPDATE INTO helicoptero (marca, modelo, capacidade) VALUES (?, ?, ?) where id = ?;"
+            );
+            update.setString(1, this.getMarca());
+            update.setString(2, this.getModelo());
+            update.setInt(3, this.getCapacidade());
+            update.setInt(4, this.getid());
+            update.execute();
+            DAO.closeConnection();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
+
+    public static boolean remove(Scanner scanner){
+        try {
+            System.out.println("Digite o Id:");
+            int id = scanner.nextInt();
+            PreparedStatement stmt = DAO.createConnection().prepareStatement(
+                "DELETE FROM helicoptero WHERE id = ?;"
+            );
+            stmt.setInt(1, id);
+            stmt.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Não foi possivel remover");
+            return false;
+            // TODO: handle exception
+        }
+       
+    }
+
 }
