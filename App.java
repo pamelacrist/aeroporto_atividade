@@ -106,7 +106,7 @@ public class App {
             case "H":
                 Helicoptero.getAll();
                 break;
-            case "J":
+            case "J":   
                 Jato.getAll();
                 break;
             default:
@@ -319,6 +319,7 @@ public class App {
                 modelo,
                 nome
             );
+            helicoptero.atualizar(scanner);
         System.out.println("Helicoptero alterado com sucesso!");
         System.out.println(helicoptero);
         } catch (Exception e) {
