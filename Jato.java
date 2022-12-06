@@ -13,6 +13,12 @@ public class Jato extends Aeromodelo {
         this.cor = cor;
         this.velocidade = velocidade;
     }
+     
+    public Jato(int id,String marca, String modelo, String nome,String cor, int velocidade) {
+        super(id,marca,modelo,nome);
+        this.cor = cor;
+        this.velocidade = velocidade;
+    }
 
     public String getcor() {
         return cor;
@@ -100,7 +106,7 @@ public class Jato extends Aeromodelo {
         try{
 
             PreparedStatement update = DAO.createConnection().prepareStatement(
-                "UPDATE INTO helicoptero (marca, modelo, capacidade) VALUES (?, ?, ?) where id = ?;"
+                "UPDATE INTO jato (marca, modelo, nome,cor,velocidade) VALUES (?, ?, ?) where id = ?;"
             );
             update.setString(1, this.getMarca());
             update.setString(2, this.getModelo());
@@ -114,7 +120,7 @@ public class Jato extends Aeromodelo {
             System.out.println(e);
             return false;
         }
-    }
+    }               
 
     public static boolean remove(Scanner scanner){
         try {

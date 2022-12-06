@@ -14,6 +14,13 @@ public class Aviao extends Aeromodelo {
         this.capacidade = capacidade;
     }
 
+    
+    public Aviao(int id,String marca, String modelo, String nome,String prefixo, int capacidade) {
+        super(id,marca,modelo,nome);
+        this.prefixo = prefixo;
+        this.capacidade = capacidade;
+    }
+
     public String getprefixo() {
         return prefixo;
     }
