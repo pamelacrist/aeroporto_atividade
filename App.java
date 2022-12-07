@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class App {
     public static void main(String[] args) {
@@ -79,16 +77,16 @@ public class App {
                 listarAeronave(scanner);
                 break;
             case "C":
-                listarCompanhia(scanner);
+                Companhia.getAll();
                 break;
             case "H":
-                listarHangar(scanner);
+                Hangar.getAll();
                 break;
             case "P":
-                listarPista(scanner);
+                Pista.getAll();
                 break;
             case "V":
-                listarVoo(scanner);
+                Voo.getAll();
                 break;
             default:
                 break;
@@ -123,16 +121,16 @@ public class App {
                 excluirAeronave(scanner);
                 break;
             case "C":
-                excluirCompanhia(scanner);
+                Companhia.remove(scanner);
                 break;
             case "H":
-                excluirHangar(scanner);
+                Hangar.remove(scanner);
                 break;
             case "P":
-                excluirPista(scanner);
+                Pista.remove(scanner);
                 break;
             case "V":
-                excluirVoo(scanner);
+                Voo.remove(scanner);
                 break;
             default:
                 break;
@@ -146,13 +144,13 @@ public class App {
         String tipo = scanner.next();
         switch (tipo) {
             case "A":
-                excluirAviao(scanner);
+                Aviao.remove(scanner);
                 break;
             case "H":
                 Helicoptero.remove(scanner);
                 break;
             case "J":
-                excluirJato(scanner);
+                Jato.remove(scanner);
                 break;
             default:
                 break;
@@ -299,6 +297,34 @@ public class App {
         }
     }
 
+    public static void alterarAviao(Scanner scanner, String nome){
+        System.out.println("Informe a cor:");
+        String cor = scanner.next();
+        System.out.println("Informe a capacidade:");
+        int capacidade = scanner.nextInt();
+        System.out.println("Informe a marca:");
+        String marca = scanner.next();
+        System.out.println("Informe a modelo:");
+        String modelo = scanner.next();
+        System.out.println("Informe o id do Aviao:");
+        Integer idAviao = scanner.nextInt();
+        try {
+            Aviao aviao = new Aviao(
+                idAviao,
+                marca,
+                modelo,
+                nome,
+                cor,
+                capacidade
+            );
+            aviao.atualizar(scanner);
+        System.out.println("Aviao alterado com sucesso!");
+        System.out.println(aviao);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void alterarHelicoptero(Scanner scanner, String nome){
         System.out.println("Informe a cor:");
         String cor = scanner.next();
@@ -320,12 +346,222 @@ public class App {
                 nome
             );
             helicoptero.atualizar(scanner);
-        System.out.println("Helicoptero alterado com sucesso!");
-        System.out.println(helicoptero);
+            System.out.println("Helicoptero alterado com sucesso!");
+            System.out.println(helicoptero);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void alterarJato(Scanner scanner, String nome){
+        System.out.println("Informe a cor:");
+        String cor = scanner.next();
+        System.out.println("Informe a velocidade:");
+        int velocidade = scanner.nextInt();
+        System.out.println("Informe a marca:");
+        String marca = scanner.next();
+        System.out.println("Informe a modelo:");
+        String modelo = scanner.next();
+        System.out.println("Informe o id do Jato:");
+        Integer idJato = scanner.nextInt();
+        try {
+            Jato jato = new Jato(
+                idJato,
+                marca,
+                modelo,
+                nome,
+                cor,
+                velocidade
+            );
+            jato.atualizar(scanner);
+            System.out.println("Jato alterado com sucesso!");
+            System.out.println(jato);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void alterarCompanhia(Scanner scanner){
+        System.out.println("Informe o cnpj:");
+        String cnpj = scanner.next();
+        System.out.println("Informe o nome:");
+        String nome = scanner.next();
+        System.out.println("Informe o id do Companhia:");
+        Integer idCompanhia = scanner.nextInt();
+        try {
+            Companhia companhia = new Companhia(
+                idCompanhia,
+                nome,
+                cnpj
+            );
+            companhia.atualizar(scanner);
+            System.out.println("Companhia alterado com sucesso!");
+            System.out.println(companhia);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void alterarPista(Scanner scanner){
+        System.out.println("Informe o numero:");
+        String numero = scanner.next();
+        System.out.println("Informe o id do Pista:");
+        Integer idPista = scanner.nextInt();
+        try {
+            Pista pista = new Pista(
+                idPista,
+                numero
+            );
+            pista.atualizar(scanner);
+            System.out.println("Pista alterado com sucesso!");
+            System.out.println(pista);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void alterarHangar(Scanner scanner){
+        System.out.println("Informe o local:");
+        String local = scanner.next();
+        System.out.println("Informe o id do Hangar:");
+        Integer idHangar = scanner.nextInt();
+        try {
+            Hangar hangar = new Hangar(
+                idHangar,
+                local
+            );
+            hangar.atualizar(scanner);
+            System.out.println("Hangar alterado com sucesso!");
+            System.out.println(hangar);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void alterarVoo(Scanner scanner){
+        System.out.println("Informe o numero:");
+        String numero = scanner.next();
+        System.out.println("Informe o id do Voo:");
+        Integer idVoo = scanner.nextInt();
+        System.out.println("Informe a data:");
+        String data = scanner.next();
+        System.out.println("Informe a hora:");
+        String hora = scanner.next();
+        System.out.println("Informe a origem:");
+        String origem = scanner.next();
+        System.out.println("Informe a destino:");
+        String destino = scanner.next();
+        System.out.println("Informe a piloto:");
+        String piloto = scanner.next();
+        System.out.println("Informe a copiloto:");
+        String copiloto = scanner.next();
+        System.out.println("Informe a observacao:");
+        String observacao = scanner.next();
+        try {
+            Voo voo = new Voo(
+                idVoo,
+                numero,
+                data,
+                hora,
+                origem,
+                destino,
+                piloto,
+                copiloto,
+                observacao
+            );
+            voo.atualizar(scanner);
+            System.out.println("Voo alterado com sucesso!");
+            System.out.println(voo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    
+    public static void cadastrarCompanhia(Scanner scanner){
+        System.out.println("Informe o cnpj:");
+        String cnpj = scanner.next();
+        System.out.println("Informe o nome:");
+        String nome = scanner.next();
+        try {
+            Companhia companhia = new Companhia(
+                nome,
+                cnpj
+            );
+            companhia.atualizar(scanner);
+            System.out.println("Companhia cadastrado com sucesso!");
+            System.out.println(companhia);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void cadastrarPista(Scanner scanner){
+        System.out.println("Informe o numero:");
+        String numero = scanner.next();
+        try {
+            Pista pista = new Pista(
+                numero
+            );
+            pista.atualizar(scanner);
+            System.out.println("Pista cadastrado com sucesso!");
+            System.out.println(pista);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void cadastrarHangar(Scanner scanner){
+        System.out.println("Informe o local:");
+        String local = scanner.next();
+        try {
+            Hangar hangar = new Hangar(
+                local
+            );
+            hangar.atualizar(scanner);
+            System.out.println("Hangar cadastrado com sucesso!");
+            System.out.println(hangar);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void cadastrarVoo(Scanner scanner){
+        System.out.println("Informe o numero:");
+        String numero = scanner.next();
+        System.out.println("Informe a data:");
+        String data = scanner.next();
+        System.out.println("Informe a hora:");
+        String hora = scanner.next();
+        System.out.println("Informe a origem:");
+        String origem = scanner.next();
+        System.out.println("Informe a destino:");
+        String destino = scanner.next();
+        System.out.println("Informe a piloto:");
+        String piloto = scanner.next();
+        System.out.println("Informe a copiloto:");
+        String copiloto = scanner.next();
+        System.out.println("Informe a observacao:");
+        String observacao = scanner.next();
+        try {
+            Voo voo = new Voo(
+                numero,
+                data,
+                hora,
+                origem,
+                destino,
+                piloto,
+                copiloto,
+                observacao
+            );
+            voo.atualizar(scanner);
+            System.out.println("Voo cadastrado com sucesso!");
+            System.out.println(voo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     public static void sair() {
         System.out.println("Saindo...");

@@ -12,6 +12,20 @@ public class Jato extends Aeromodelo {
         super(marca,modelo,nome);
         this.cor = cor;
         this.velocidade = velocidade;
+        try{
+            PreparedStatement insert = DAO.createConnection().prepareStatement(
+                "INSERT INTO jato (marca, modelo, nome, cor, velocidade) VALUES (?, ?, ?, ?, ?);"
+            );
+            insert.setString(1, this.getMarca());
+            insert.setString(2, this.getModelo());
+            insert.setString(3, this.getNome());
+            insert.setString(4, this.getcor());
+            insert.setInt(5, this.getvelocidade());
+            insert.execute();
+            DAO.closeConnection();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
      
     public Jato(int id,String marca, String modelo, String nome,String cor, int velocidade) {
@@ -52,22 +66,22 @@ public class Jato extends Aeromodelo {
     }
 
     
-    public static Helicoptero getById(int id)  {
+    public static Jato getById(int id)  {
         try {
-            Helicoptero helicoptero = null;
+            Jato jato = null;
             ResultSet select = DAO.createConnection().createStatement().executeQuery(
-                "SELECT * FROM helicoptero where id="+id+";"
+                "SELECT * FROM jato where id="+id+";"
             );
             while(select.next()){
-                helicoptero = new Helicoptero(
+                jato = new Jato(
                     select.getInt("id"), 
-                    select.getString("cor"),
-                    select.getInt("capacidade"),
-                    select.getString("nome"),
+                    select.getString("marca"),
                     select.getString("modelo"),
-                    select.getString("marca")
+                    select.getString("nome"),
+                    select.getString("cor"),
+                    select.getInt("velocidade")
                 );
-                return helicoptero;
+                return jato;
             }
         }
         catch (Exception err) {
@@ -77,24 +91,24 @@ public class Jato extends Aeromodelo {
     }
 
 
-    public static ArrayList<Helicoptero> getAll()  {
+    public static ArrayList<Jato> getAll()  {
         try {
-            ArrayList<Helicoptero> helicopteros = new ArrayList<>();
+            ArrayList<Jato> jatos = new ArrayList<>();
             ResultSet select = DAO.createConnection().createStatement().executeQuery(
-                "SELECT * FROM helicoptero;"
+                "SELECT * FROM jato;"
             );
             while(select.next()){
-                Helicoptero helicoptero = new Helicoptero(
+                Jato jato = new Jato(
                     select.getInt("id"), 
-                    select.getString("cor"),
-                    select.getInt("capacidade"),
-                    select.getString("nome"),
+                    select.getString("marca"),
                     select.getString("modelo"),
-                    select.getString("marca")
+                    select.getString("nome"),
+                    select.getString("cor"),
+                    select.getInt("velocidade")
                 );
-                helicopteros.add(helicoptero);
+                jatos.add(jato);
             }
-            return helicopteros;
+            return jatos;
         }
         catch (Exception err) {
             System.out.println(err);
@@ -106,13 +120,14 @@ public class Jato extends Aeromodelo {
         try{
 
             PreparedStatement update = DAO.createConnection().prepareStatement(
-                "UPDATE INTO jato (marca, modelo, nome,cor,velocidade) VALUES (?, ?, ?) where id = ?;"
+                "UPDATE INTO jato (marca, modelo, nome,cor,velocidade) VALUES (?, ?, ?, ?,?) where id = ?;"
             );
             update.setString(1, this.getMarca());
             update.setString(2, this.getModelo());
-            update.setInt(3, this.getvelocidade());
+            update.setString(3, this.getNome());
             update.setString(4, this.getcor());
-            update.setInt(5, this.getid());
+            update.setInt(5, this.getvelocidade());
+            update.setInt(6, this.getid());
             update.execute();
             DAO.closeConnection();
             return true;
@@ -127,7 +142,7 @@ public class Jato extends Aeromodelo {
             System.out.println("Digite o Id:");
             int id = scanner.nextInt();
             PreparedStatement stmt = DAO.createConnection().prepareStatement(
-                "DELETE FROM helicoptero WHERE id = ?;"
+                "DELETE FROM jato WHERE id = ?;"
             );
             stmt.setInt(1, id);
             stmt.execute();
